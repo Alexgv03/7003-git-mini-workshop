@@ -36,114 +36,36 @@ This exercise takes place on a dedicated practice branch.
 
 ---
 
-## 📑 Step-by-Step Instructions (For **exercise 1**)
+# 🔀 Interactive Rebase Exercise
 
-### Step 1: Clone the Repository
-1. Click the **Code** button at the top right of this GitHub page to get the link of this repository.
-2. Clone your forked repository to your computer:
+In this exercise, you will clean up the commit history of this branch using
+`git rebase -i`.
 
-```bash
-git clone https://github.com/MarisolAL/7003-git-mini-workshop.git
-cd 7003-git-mini-workshop
-```
+## 📋 Instructions
 
-Or you can use GitHub CLI:
+Each commit on this branch contains a specific instruction in its **commit message** telling you what action to take (e.g., *squash*, *reword*, *edit*, *drop*, or *amend*).
 
-```bash
-gh repo clone MarisolAL/7003-git-mini-workshop
-```
+### Step-by-step Workflow
 
-### Step 2: Generate Your Anonymous Hash
+1. **Inspect the Commit History**
+   Run the following command to review the list of commits and their instructions:
+   ```bash
+   git log --oneline
+   ```
 
-Run the interactive Python script included in the repository to generate your unique hash ID:
+2. **Start Interactive Rebase**
+   Start an interactive rebase back to the base commit:
+   ```bash
+   git rebase -i <base_commit_hash>
+   ```
+3. **Execute the Tasks**
+4. **Push Your Working Branch**
+   ```bash
+   git push -u origin exercise/<username>-rebase
+   ``
 
-```bash
-python3 scripts/generate_hash.py
-```
-
-The script will ask your Full Name and University ID and will output a 12-character Hash ID (e.g., `a5b8f7e29c1d`). Save this hash!
-
-
-### Step 3: Create a Feature Branch
-
-Create and switch to a new branch. Your branch name MUST follow this format: `<hash>-profile`
+Tip: If you make a mistake during the rebase and want to abort at any point, run:
 
 ```bash
-# Example: if your hash is a5b8f7e29c1d
-git switch -c a5b8f7e29c1d-profile
-```
-
-### Step 4: Make Your Changes
-
-You must update only two files in the `profiles/` directory:
-
-1. Create your individual profile file (`profiles/<hash>.json`):
-Create a new file named `profiles/<your-hash>.json` using the template below:
-
-```json
-{
-  "hash_id": "YOUR_HASH_HERE",
-  "favorite_language": "Python",
-  "favorite_git_command": "git status",
-  "learning_goal": "Destroy prod without traces~"
-}
-```
-
-2. Add your hash to the shared directory (`profiles/all-da-people.json`):
-Open `profiles/all-da-people.json` and append your hash entry to the array.
-
-⚠️ **Note on Merge Conflicts**: Since all students are editing `profiles/all-da-people.json`, you may encounter a merge
-conflict when merging upstream changes. Refer to the conflict section below if needed.
-
-### Step 5: Stage and Commit Only the Needed Changes
-
-Do not commit untracked or temporary files. Stage ONLY your two modified/created files in the `profiles/` folder:
-
-```bash
-git add profiles/<your-hash>.json profiles/all-da-people.json
-```
-
-#### (,; ⩌ ;,) Commit Message Guidelines 🐤
-
-Your commit message must follow the Conventional Commits format:
-
-- Title Format: `<type>(<scope>): <short summary>`
-- Allowed Types: `feat` (new feature), `fix` (bug fix), `docs` (documentation updates).
-- Scope: `profile`
-
-Valid examples:
-
-- `feat(profile): add profile for hash a5b8f7e29c1d`
--  `docs(profile): update profile details`
-
-Create your commit:
-
-```bash
-git commit -m "feat(profile): add profile for hash <your-hash>"
-```
-
-### Step 6: Push your branch and open a PR
-
-1. Push your branch to your remote GitHub:
-
-```bash
-git push -u origin <your-hash>-profile
-```
-
-2. Navigate to the repository on GitHub
-3. You will see a banner saying "Compare & pull request". Click it.
-
-
-#### ദ്ദി◝ ⩊ ◜.ᐟ Pull Request Guidelines 🪷
-
-- PR Title: Must match your commit format: `feat(profile): add profile for hash <your-hash>`
-- PR Description: Fill out the provided Pull Request template completely.
-- Verify that the automated `Privacy & PII Guardrail` check passes.
-
-### 🔒 Privacy Notice
-
-- Never commit your real name, student ID, or personal email address (@my.mail or any other domain).
-- The PRs will be reviewed at different times, so update your branches frequently
-```bash
-git fetch --all
+git rebase --abort
 ```
